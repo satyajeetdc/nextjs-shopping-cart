@@ -8,8 +8,10 @@ import {
   CardFooter,
   CardTitle,
 } from "@/components/ui/card";
+import { useRouter } from "next/navigation";
 
 export default function ProductCard({ item }) {
+  const router = useRouter();
   return (
     <Card>
       <CardContent>
@@ -29,7 +31,9 @@ export default function ProductCard({ item }) {
               ${item?.price}
             </p>
             <div>
-              <Button>Details</Button>
+              <Button onClick={() => router.push(`${item?.id}`)}>
+                Details
+              </Button>
             </div>
           </div>
         </div>
