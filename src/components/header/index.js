@@ -5,8 +5,6 @@ import { Button } from "../ui/button";
 import { loginAction, logoutAction } from "@/actions";
 
 export default function Header({ getSession }) {
-  console.log(getSession, "getSession in header");
-
   async function handleOauthSignIn() {
     await loginAction();
   }
