@@ -2,8 +2,19 @@
 
 import Link from "next/link";
 import { Button } from "../ui/button";
+import { loginAction, logoutAction } from "@/actions";
 
-export default function Header() {
+export default function Header({ getSession }) {
+  console.log(getSession, "getSession in header");
+
+  async function handleOauthSignIn() {
+    await loginAction();
+  }
+
+  async function handleOauthSignOut() {
+    await logoutAction();
+  }
+
   return (
     <header className="flex shadow-md py-4 px-4 bg-white min-h-[70px] tracking-wide relative z-50">
       <div className="flex flex-wrap items-center justify-between gap-5 w-full">
@@ -20,8 +31,10 @@ export default function Header() {
       </ul>
 
       <div className="flex space-x-3">
-        <form>
-          <Button>Login</Button>
+        <form
+          action={getSession?.user ? handleOauthSignOut : handleOauthSignIn}
+        >
+          <Button type="submit">{getSession?.user ? "Logout" : "Login"}</Button>
         </form>
       </div>
     </header>
